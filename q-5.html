@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Page</title>
+   <style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .container {
+        max-width: 400px;
+        padding: 20px;
+        background-color: #ffffff;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="tel"] {
+        width: 90%;
+        padding: 12px;
+        margin-bottom: 14px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .error {
+        color: #ff4444;
+        font-size: 14px;
+        text-align: left;
+    }
+
+    input[type="submit"] {
+        background-color: #3498db;
+        color: #fff;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        font-size: 16px;
+    }
+
+    input[type="submit"]:hover {
+        background-color: red;
+    }
+	/*This css is use for address */
+label[for="address"] {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+input[type="text"][id="address"] {
+    width: 90%;
+    padding: 12px;
+    margin-bottom: 14px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.error[id="addressError"] {
+    color: #ff4444;
+    font-size: 14px;
+    text-align: left;
+}
+
+</style>
+
+</head>
+<body>
+    <div class="container">
+        <h1>Registration Page</h1>
+		<form id="registrationForm" onsubmit="return validateForm();">
+
+           
+		   <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" >
+            <span class="error" id="firstNameError"></span>
+
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName">
+            <span class="error" id="lastNameError"></span>
+
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email">
+            <span class="error" id="emailError"></span>
+          
+		    <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+            <span class="error" id="passwordError"></span>
+			
+            <label for="mobile">Mobile Number:</label>
+            <input type="tel" id="mobile" name="mobile">
+            <span class="error" id="mobileError"></span>
+
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address">
+            <span class="error" id="addressError"></span>
+             
+            <input type="submit" value="Register">
+        </form>
+    </div>
+
+     <script>
+        function validateForm() {
+            const firstName = document.getElementById("firstName").value;
+            const lastName = document.getElementById("lastName").value;
+            const password = document.getElementById("password").value;
+            const email = document.getElementById("email").value;
+            const mobile = document.getElementById("mobile").value;
+            const address = document.getElementById("address").value;
+
+            const firstNameError = document.getElementById("firstNameError");
+            const lastNameError = document.getElementById("lastNameError");
+            const passwordError = document.getElementById("passwordError");
+            const emailError = document.getElementById("emailError");
+            const mobileError = document.getElementById("mobileError");
+            const addressError = document.getElementById("addressError");
+			
+            // Reset error messages
+            firstNameError.textContent = "";
+            lastNameError.textContent = "";
+            passwordError.textContent = "";
+            emailError.textContent = "";
+            mobileError.textContent = "";
+            addressError.textContent = "";
+
+            // Validation logic
+            if (firstName.length < 6 || !/^[A-Za-z]+$/.test(firstName)) {
+                firstNameError.textContent = "First name should contain at least 6 alphabetic characters.";
+                return false;
+            }
+
+            if (lastName.trim() === "") {
+                lastNameError.textContent = "Last name cannot be empty.";
+                return false;
+            }
+
+            if (password.length < 6) {
+                passwordError.textContent = "Password should be at least 6 characters long.";
+                return false;
+            }
+
+            if (!/^[\w\.-]+@[\w\.-]+\.\w+$/.test(email)) {
+                emailError.textContent = "Invalid email address.";
+                return false;
+            }
+
+            if (!/^\d{10}$/.test(mobile)) {
+                mobileError.textContent = "Mobile number should contain 10 digits only.";
+                return false;
+            }
+			if (address.trim() === "") {
+                addressError.textContent = "Address cannot be empty.";
+                return false;
+            }
+
+            // If all validations pass, the form can be submitted
+            return true;
+        }
+    </script>
+</body>
+</html>
